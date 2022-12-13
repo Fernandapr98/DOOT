@@ -1,11 +1,15 @@
 pipeline {
-    agent any
-
-    stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello Worlddd'
-            }
-        }
+  agent any
+  stages {
+    stage ('version') {
+      steps {
+        sh 'node --version'
+      }
     }
+    stage ('hello') {
+      steps {
+        sh 'PruebaDeBuild.sh'
+      }
+    }
+  }
 }
