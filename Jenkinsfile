@@ -1,10 +1,13 @@
 pipeline {
     agent any
-
+    
+    tools {nodejs "node"}
+    
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo 'Hello World'
+                git 'https://github.com/Fernandapr98/DOOT.git'
+                bat 'npm install'
             }
         }
     }
