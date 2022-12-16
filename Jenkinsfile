@@ -7,52 +7,18 @@ pipeline {
     
     agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
+    stage('Build'){
+            steps{
+                sh '''
+                    echo '*******BUILD*********'
+                    cd node
+                    pwd
+                    whoami
+                    docker build . -t fernandadott
+                    docker tag fernanda-dott fernandadott/fernanda-dott
+                    docker push fernandadott/fernanda-dott
+
+                 '''
             }
         }
-        stage('Testingggg') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Sonar') {
-            steps {
-                echo 'SonarCloud'
-                sh ' cd node '
-                sh ' pwd '
-                withSonarQubeEnv('SonarCloud') {
-
-                    sh '''${scannerHome}/bin/sonar-scanner \
-
-                        -Dsonar.organization=fernandapr98 \
-
-                        -Dsonar.projectKey=Fernandapr98_DOOT \
-
-                        -Dsonar.sources=./node/ \
-
-                        -Dsonar.host.url=https://sonarcloud.io
-
-                    '''
-
-                }
-
-            }
-
-        }
-                 /*sh '''withSonarQubeEnv('SonarCloud') {
-                    sonar-scanner \
-                        -Dsonar.organization=fernandapr98 \
-                        -Dsonar.projectKey=Fernandapr98_DOOT \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=https://sonarcloud.io '''*/
-                }
-            }
-        
-        stage('Deployingggg') {
-            steps {
-
     }
-}
