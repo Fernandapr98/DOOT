@@ -1,15 +1,26 @@
-    stage('Build'){
-            steps{
-                sh '''
-                    echo '*******BUILD*********'
-                    cd node
-                    pwd
-                    whoami
-                    docker build . -t fernandadott
-                    docker tag fernanda-dott fernandadott/fernanda-dott
-                    docker push fernandadott/fernanda-dott
-
-                 '''
-            }
-        }
+pipeline {
+        nodejs "node"
     }
+
+    stages {
+        
+  stages {
+    stage('install') {
+      steps {
+        git branch: 'master', url: 'https://github.com/mendozaGabo/DOTT-Gabriel.git'
+        dir('node') {
+          sh 'npm install'
+        }
+      }
+    }
+
+        
+    stage('test') {
+      steps {
+        dir('node') {
+          sh 'npm run test'
+        }
+      }
+    }
+    }
+}
