@@ -1,9 +1,7 @@
 pipeline {
         nodejs "node"
     }
-
-    stages {
-        
+    
   stages {
     stage('install') {
       steps {
