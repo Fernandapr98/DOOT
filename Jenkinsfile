@@ -1,12 +1,3 @@
-pipeline {
-    environment {
-
-        scannerHome = tool 'sonarcloud';
-
-    }
-    
-    agent any
-
     stage('Build'){
             steps{
                 sh '''
