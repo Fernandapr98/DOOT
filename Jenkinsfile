@@ -17,9 +17,7 @@ pipeline {
      stage('build'){
         steps {
          git 'https://github.com/Fernandapr98/DOTT.git'
-         dir('node') {
-           sh 'npm run test'
-           }
+         dir('node') 
          }
        }
      }
