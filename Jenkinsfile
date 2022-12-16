@@ -1,6 +1,6 @@
 pipeline {
-    agent any 
-    
+    agent any
+
     tools {
         nodejs "node"
     }
@@ -13,10 +13,10 @@ pipeline {
            }
          }
        }
-I
+
      stage('build'){
         steps {
-         git 'https://github.com/Fernandapr98/DOTT.git' 
+         git 'https://github.com/Fernandapr98/DOTT.git'
          dir('node')
          }
        }
