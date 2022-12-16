@@ -1,38 +1,58 @@
 pipeline {
-    agent any
     environment {
-SCANNER_HOME= tool 'SonarCloud';
-    }
 
-    tools {
-        nodejs "node"
-    }
+        scannerHome = tool 'sonarcloud';
 
-  stages {
-    stage('install') {
-      steps {
-        dir('node') {
-          sh 'npm install'
-        }
-      }
     }
+    
+    agent any
 
-    stage('Build') {
-      steps {
-        sh 'echo "Building in process" '
-        git branch: 'master', url: 'https://github.com/Fernandapr98/DOTT.git'
-        }
-      }
-      stage('Static Code Analysis') {
+    stages {
+        stage('Build') {
             steps {
-                 sh '''withSonarQubeEnv('SonarCloud') {
+                echo 'Building..'
+            }
+        }
+        stage('Testingggg') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Sonar') {
+            steps {
+                echo 'SonarCloud'
+                sh ' cd node '
+                sh ' pwd '
+                withSonarQubeEnv('SonarCloud') {
+
+                    sh '''${scannerHome}/bin/sonar-scanner \
+
+                        -Dsonar.organization=fernandapr98 \
+
+                        -Dsonar.projectKey=Fernandapr98_DOOT \
+
+                        -Dsonar.sources=./node/ \
+
+                        -Dsonar.host.url=https://sonarcloud.io
+
+                    '''
+
+                }
+
+            }
+
+        }
+                 /*sh '''withSonarQubeEnv('SonarCloud') {
                     sonar-scanner \
                         -Dsonar.organization=fernandapr98 \
                         -Dsonar.projectKey=Fernandapr98_DOOT \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=https://sonarcloud.io '''
-                    
+                        -Dsonar.host.url=https://sonarcloud.io '''*/
                 }
-        }
+            }
+        
+        stage('Deployingggg') {
+            steps {
+
     }
 }
