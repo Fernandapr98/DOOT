@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        stage('Install') {
+        stage('install') {
           steps {
            dir('node') {
              sh 'npm install'
@@ -14,7 +14,7 @@ pipeline {
          }
        }
 I
-     stage('Build'){
+     stage('build'){
         steps {
          git 'https://github.com/Fernandapr98/DOTT.git' 
          }
