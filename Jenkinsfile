@@ -16,9 +16,8 @@ pipeline {
 
     stage('test') {
       steps {
-        git branch: 'master', url: 'https://github.com/mendozaGabo/DOTT-Gabriel.git'
-        dir('node') {
-          sh 'npm run test'
+        dir('node/test/') {
+          sh 'npm test'
         }
       }
     }
