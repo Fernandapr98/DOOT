@@ -1,6 +1,9 @@
 pipeline {
     agent any
-    
+    environment {
+SCANNER_HOME= tool 'SonarCloud';
+    }
+
     tools {
         nodejs "node"
     }
@@ -14,11 +17,22 @@ pipeline {
       }
     }
 
-    stage('test') {
+    stage('Build') {
       steps {
-          sh 'npm test'
+        sh 'echo "Building in process" '
+        git branch: 'master', url: 'https://github.com/Fernandapr98/DOTT.git'
         }
       }
+      stage('Static Code Analysis') {
+            steps {
+                 sh '''withSonarQubeEnv('SonarCloud') {
+                    sonar-scanner \
+                        -Dsonar.organization=fernandapr98 \
+                        -Dsonar.projectKey=Fernandapr98_DOOT \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=https://sonarcloud.io '''
+                    
+                }
+        }
     }
-    }
-
+}
