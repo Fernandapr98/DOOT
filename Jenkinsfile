@@ -16,7 +16,6 @@ pipeline {
 
     stage('test') {
       steps {
-        dir('node/test/') {
           sh 'npm test'
         }
       }
